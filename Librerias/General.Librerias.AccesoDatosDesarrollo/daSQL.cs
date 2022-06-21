@@ -13,7 +13,7 @@ namespace General.Librerias.AccesoDatos
         public daSQL(string NombreConexion, bool cifrado = false)
         {
             esCifrado = cifrado;
-            cadenaConexion = "user=%MY_USER%;pwd=%MY_PWD%;server=%MY_SERVER%;database=%MY_DB%";
+            cadenaConexion = "user=%MY_USER_EGESOP%;pwd=%MY_PWD_EGESOP%;server=%MY_SERVER_EGESOP%;database=%MY_BD_EGESOP%";
             try
             {
                 //cadenaConexion = ConfigurationManager.ConnectionStrings[NombreConexion].ConnectionString;
