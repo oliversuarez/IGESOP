@@ -43,10 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="General.Librerias.AccesoDatos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Librerias\General.Librerias.AccesoDatosDesarrollo\bin\Debug\General.Librerias.AccesoDatos.dll</HintPath>
-    </Reference>
     <Reference Include="General.Librerias.CodigoUsuario, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Librerias\General.Librerias.AccesoDatosDesarrollo\bin\Debug\General.Librerias.CodigoUsuario.dll</HintPath>
@@ -123,6 +119,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Librerias\General.Librerias.AccesoDatosDesarrollo\General.Librerias.AccesoDatos.csproj">
+      <Project>{a0063d0a-de05-441c-96e0-70f40e9fc9f3}</Project>
+      <Name>General.Librerias.AccesoDatos</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
