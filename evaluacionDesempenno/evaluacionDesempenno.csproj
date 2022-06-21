@@ -45,11 +45,11 @@
   <ItemGroup>
     <Reference Include="General.Librerias.AccesoDatos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\General.Librerias.AccesoDatos.dll</HintPath>
+      <HintPath>..\Librerias\General.Librerias.AccesoDatosDesarrollo\bin\Debug\General.Librerias.AccesoDatos.dll</HintPath>
     </Reference>
     <Reference Include="General.Librerias.CodigoUsuario, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\General.Librerias.CodigoUsuario.dll</HintPath>
+      <HintPath>..\Librerias\General.Librerias.AccesoDatosDesarrollo\bin\Debug\General.Librerias.CodigoUsuario.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />

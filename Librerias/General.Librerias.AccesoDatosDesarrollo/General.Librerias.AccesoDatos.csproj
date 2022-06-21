@@ -34,6 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="General.Librerias.CodigoUsuario">
+      <HintPath>..\General.Librerias.CodigoUsuario.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -47,12 +50,6 @@
   <ItemGroup>
     <Compile Include="daSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\General.Librerias.CodigoUsuario\General.Librerias.CodigoUsuario.csproj">
-      <Project>{45d34ffc-bf13-4a36-af8c-e4cf2c2d033c}</Project>
-      <Name>General.Librerias.CodigoUsuario</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
