@@ -16,7 +16,7 @@ namespace evaluacionDesempenno
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "evaluacion", action = "Inicio", id = UrlParameter.Optional }
+                defaults: new { controller = "Sistema", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

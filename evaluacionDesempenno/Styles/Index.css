@@ -1,0 +1,180 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+:root {
+    --color-muniz: #eec200;
+    --color-muniz-secundario: rgba(0,0,0,0.2);
+}
+
+.container {
+    display: grid;
+    width: 100%;
+    background-color: rgb(219, 219, 223);
+    grid-template-columns: repeat(1, 1fr 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    height: 100vh;
+}
+
+
+.box_logo {
+    background-color: brown;
+    height: inherit;
+    position: relative;
+    background-image: url(https://www.munizlaw.com/assets/images/nosotros.jpg);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: rgb(116, 178, 116);
+}
+
+    .box_logo .logo {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 100px;
+        height: 40px;
+    }
+
+.box_content {
+    background-color: white;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .box_content .form {
+        width: 60%;
+        height: 600px;
+        background-color: white;
+        align-items: center;
+        box-shadow: 0px 3px 30px rgb(0 0 0 / 8%);
+        border-radius: 35px;
+    }
+
+    .box_content .title {
+        text-align: center;
+        display: block;
+        font-size: 24px;
+        font-stretch: normal;
+        font-style: normal;
+        letter-spacing: normal;
+        line-height: 1.33;
+        margin-top: 30px;
+        color: var(--color-muniz-secundario);
+    }
+
+
+    .box_content img {
+        max-width: 200px;
+        max-height: 100px;
+        width: 100%;
+        height: auto;
+        margin: auto;
+        display: block;
+        padding-top: 1rem;
+        margin-bottom: 3.5rem;
+    }
+
+    .box_content .form-control {
+        position: relative;
+        width: 60%;
+        margin: 0 auto;
+        margin-bottom: 3.5rem;
+    }
+
+        .box_content .form-control .sub_label {
+            text-align: left;
+            font-size: 14px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            line-height: 2;
+            color: var(--color-muniz-secundario);
+        }
+
+        .box_content .form-control input {
+            border: none;
+            border-bottom: 1px solid var(--color-muniz);
+            width: 100%;
+            height: 2rem;
+            font-size: 1.0625rem;
+            padding-left: 2rem;
+            line-height: 1.5;
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+            outline: none;
+        }
+
+        .box_content .form-control .i {
+            position: absolute;
+            left: 0;
+            top: 35px;
+            color: var(--color-muniz);
+        }
+
+        .box_content .form-control .button-login {
+            height: 40px;
+            padding: 0 16px;
+            padding-bottom: 20px;
+            font-size: 18px;
+            line-height: 38px;
+            border-radius: 20px;
+            display: block;
+            width: 100%;
+            align-content: center;
+            color: #fff;
+            background-color: var(--color-muniz);
+            border-color: var(--color-muniz);
+        }
+
+
+            .box_content .form-control .button-login:hover {
+                background-color: var(--color-muniz);
+                border-color: var(--color-muniz);
+                opacity: 0.8;
+                cursor: pointer;
+            }
+
+        .box_content .form-control .iconin {
+            position: absolute;
+            right: 30px;
+            top: 10px;
+            color: white;
+        }
+
+.a_sede {
+    text-decoration: none;
+}
+
+@media (max-width: 875px) {
+    .container {
+        display: grid;
+        width: 100%;
+        background-color: rgb(219, 219, 223);
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        height: 100vh;
+    }
+
+
+    .box_logo {
+        background-color: brown;
+        height: inherit;
+        position: relative;
+        height: 80px;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-color: var(--color-muniz);
+    }
+
+    .box_content .form {
+        width: 90%;
+    }
+}
