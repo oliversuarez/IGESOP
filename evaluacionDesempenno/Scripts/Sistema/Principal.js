@@ -1,4 +1,4 @@
-﻿window.onload = function () {
+window.onload = function () {
     var list = document.getElementsByClassName("focus_link");
     for (var i = 0; i < list.length; i++) {
         list[i].onclick = function () {
@@ -41,13 +41,13 @@ user.onclick = function () {
     }
 };
 
-datos_personales.onclick = function () {
-    iframe.src = "formularios.html";
-};
+//datos_personales.onclick = function () {
+//    iframe.src = "formularios.html";
+//};
 
-exp_laboral.onclick = function () {
-    iframe.src = "experienciaLaboral.html";
-};
+//exp_laboral.onclick = function () {
+//    iframe.src = "experienciaLaboral.html";
+//};
 
 
 full_screen.onclick = function () {
@@ -79,3 +79,8 @@ box1.onclick = function () {
         }, 1);
     }
 };
+
+id_evaluacion.onclick = function () {
+    var url = hdfRaiz.value + 'evaluacion/Inicio';
+    iframe.src = url;
+}

@@ -2,13 +2,15 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Styles/controles.css" rel="stylesheet" />
     <title>Inicio</title>
 </head>
 <body>
     <div>
+        <div class="title"></div>
     </div>
     <input id="hdfRaiz" type="hidden" value='@Url.Content("~")' />
-    <script src='@Url.Content("~")Scripts/General.js'></script>
-    <script src='@Url.Content("~")Scripts/inicio.js'></script>
+    <script src="~/Scripts/Genericos/General.js"></script>
+    <script src="~/Scripts/Evaluacion/evaluacion.js"></script>
 </body>
 </html>

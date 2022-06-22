@@ -1,7 +1,4 @@
 ﻿
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -16,12 +13,12 @@
 
         <div class="box_logo">
             <img alt="logo" class="logo"
-                 src="logo.jpeg">
+                 src="~/Imagenes/logo.jpeg">
         </div>
         <div class="box_content">
             <div class="form">
                 <div class="title">Login del Sistema</div>
-                <img src="logo.jpeg" width="200" height="100" />
+                <img src="~/Imagenes/logo.jpeg" width="200" height="100" />
                 <div class="form-control">
                     <div class="sub_label">Usuario</div>
                     <i class="i fas fa-user"></i>
@@ -46,6 +43,8 @@
         </div>
 
     </div>
+    <input id="hdfRaiz" type="hidden" value='@Url.Content("~")' />
+
     <script src="~/Scripts/Sistema/Index.js"></script>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="~/Styles/Principal.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/4777b4e2aa.js" crossorigin="anonymous"></script>
     <title>Principal</title>
 </head>
 <body>
@@ -46,7 +47,7 @@
                     <ul style="display: none">
                         <li>
                             <i class="fa fa-calendar"></i>
-                            <a id="datos_personales">Datos personales</a>
+                            <a id="id_evaluacion">Evaluacion</a>
                         </li>
                         <li>
                             <i class="fa fa-calendar"></i>
@@ -105,5 +106,7 @@
         </div>
     </div>
 </body>
+<input id="hdfRaiz" type="hidden" value='@Url.Content("~")' />
+
 <script src="~/Scripts/Sistema/Principal.js"></script>
 </html>

@@ -18,8 +18,8 @@ namespace evaluacionDesempenno.Controllers
             string rpta = "";
             daSQL odaSQL = new daSQL("conIGESOP");
             
-            //rpta = odaSQL.EjecutarComando("dbo.usp_formato_evaDesempenno");
-            rpta = odaSQL.EjecutarComando("dbo.sha512");
+            rpta = odaSQL.EjecutarComando("dbo.usp_formato_evaDesempenno");
+            //rpta = odaSQL.EjecutarComando("dbo.sha512");
             return rpta;
         }
 

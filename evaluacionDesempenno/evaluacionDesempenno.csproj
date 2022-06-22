@@ -104,9 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\logo.jpeg" />
+    <Content Include="Scripts\Evaluacion\evaluacion.js" />
     <Content Include="Scripts\Genericos\General.js" />
-    <Content Include="Scripts\inicio.js" />
     <Content Include="Scripts\Sistema\Index.js" />
+    <Content Include="Scripts\Sistema\Principal.js" />
+    <Content Include="Styles\controles.css" />
     <Content Include="Styles\Index.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -134,8 +137,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Imagenes\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Librerias\General.Librerias.AccesoDatosDesarrollo\General.Librerias.AccesoDatos.csproj">
