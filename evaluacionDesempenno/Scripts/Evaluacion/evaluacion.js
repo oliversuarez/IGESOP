@@ -24,6 +24,7 @@ function mostrarRpt(rpta) {
     }     
 }
 function crearEvaluacion() {
+    GUI.Combo(usuario,listaUsu);
     titulo_evaluacion.innerHTML = titulo;
     var descripcion= crearSubtituloResena(listaCompetencia[0].split(sepCampos)[0], listaCompetencia[0].split(sepCampos)[1]);
     listaCompetencia.splice(0, 1);
@@ -114,14 +115,36 @@ function crearTablaOpcionMultiple(listaOpciones,listaData,div,descripcion) {
     html += "</tbody>";
     html += "</table>";
     div.innerHTML = html;
-
+    configurarCheck();
     function configurarCheck() {
-        var listaControl = [];
+       
+        var campos = [];
         for (var i = 1; i < nlistaData; i++) {
-            var 
-            listaControl=  div.getElementsByClassName(nlistaData[i][0] + "opcionCheck");
+            var adm = null;
+            campos = listaData[i].split(sepCampos);
+
+            adm = new asignarCheck(campos[0] + "opcionCheck");
         }
       
+    }
+
+    function asignarCheck(clase) {
+        var anterior = null;
+        var listaControl = [];
+        listaControl = div.getElementsByClassName(clase);
+        nlistaControl = listaControl.length;
+        for (var j = 0; j < nlistaControl; j++) {
+            listaControl[j].onclick = function () {
+                if (anterior == null) {
+                    anterior = this;
+                    this.innerHTML = "X";
+                } else {
+                    anterior.innerHTML = "";
+                    anterior = this;
+                    this.innerHTML = "X";
+                }
+            }
+        }
     }
 }
 
