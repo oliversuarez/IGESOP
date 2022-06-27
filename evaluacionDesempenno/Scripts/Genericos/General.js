@@ -10,27 +10,27 @@ var sepComodin = '=';
 
 var contadorSessionActiva = 0;
 var contadorSessionLogout = 0;
-var sessionActiva = setInterval(function () {
-    contadorSessionActiva = contadorSessionActiva + 1;
-    contadorSessionLogout = contadorSessionLogout + 1;
-    console.log("SessionActiva :" +contadorSessionActiva);
-    console.log("SessionLogout :"+contadorSessionLogout);
-    //if (contadorSessionLogout == 10800) {
-    if (contadorSessionLogout == 10800) {
-        clearInterval(sessionActiva);
-        var url = hdfRaiz.value + 'Sistema/Logout';
-        window.location.href  = url;
-    }
-    if (contadorSessionActiva==600) {
-        Http.get("Sistema/obtenerVersion", mostrarVersion);
-        function mostrarVersion(rpta) {
-            if (validaResponseData(rpta)) {
-                console.log(rpta);
-                contadorSessionActiva = 0;
-            }
-        }
-    }
-}, 1000);
+//var sessionActiva = setInterval(function () {
+//    contadorSessionActiva = contadorSessionActiva + 1;
+//    contadorSessionLogout = contadorSessionLogout + 1;
+//    console.log("SessionActiva :" +contadorSessionActiva);
+//    console.log("SessionLogout :"+contadorSessionLogout);
+//    //if (contadorSessionLogout == 10800) {
+//    if (contadorSessionLogout == 10800) {
+//        clearInterval(sessionActiva);
+//        var url = hdfRaiz.value + 'Sistema/Logout';
+//        window.location.href  = url;
+//    }
+//    if (contadorSessionActiva==600) {
+//        Http.get("Sistema/obtenerVersion", mostrarVersion);
+//        function mostrarVersion(rpta) {
+//            if (validaResponseData(rpta)) {
+//                console.log(rpta);
+//                contadorSessionActiva = 0;
+//            }
+//        }
+//    }
+//}, 1000);
 
 var Http = (function () {
     function Http() {

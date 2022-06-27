@@ -7,10 +7,13 @@
 </head>
 <body>
     <div class="container">
-        <select id="usuario"></select>
-        <div class="title" id="titulo_evaluacion"></div>
-        <div id="evaluacion_evaluacion"></div>
-        <div id="objetivo_evaluacion"></div>
+        <select class="grid_3 m5" id="usuario"></select>
+        <div class="form_basic_horizontal grid_start " id="leyenda"></div>
+        <h1 class="title m5 bold" id="titulo_evaluacion"></h1>
+        <div class="m5" id="evaluacion_evaluacion"></div>
+        <div class="m5" id="objetivo_evaluacion"></div>
+        <div class="texto bold Upper m5">Observaciones</div>
+        <textarea class="grid_8 m5" rows="15"></textarea>
     </div>
     <input id="hdfRaiz" type="hidden" value='@Url.Content("~")' />
     <script src="~/Scripts/Genericos/General.js"></script>

@@ -46,6 +46,10 @@
 .Upper {
     text-transform: uppercase;
 }
+.bold{
+    font-weight:bold;
+
+}
 
 .container {
     padding: 20px;
@@ -175,7 +179,7 @@ input[type="date"]:focus,
 input[type="datetime-local"]:focus,
 input[type="text"]:focus {
     color: #495057;
-    background-color: #fff;
+    background-color: #fff !important;
     border-color: #80bdff;
     outline: 0;
     -webkit-box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
@@ -416,6 +420,9 @@ select:focus {
     padding: 5px;
 }
 
+.leyend {
+  border:  1px solid #dee2e6;
+}
 .form_basic_horizontal_permanent {
     display: -webkit-box;
     display: -ms-flexbox;
