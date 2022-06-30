@@ -5,10 +5,10 @@ using General.Librerias.AccesoDatos;
 
 namespace evaluacionDesempenno.Controllers
 {
-    public class evaluacionController : Controller
+    public class TrabajadorController : Controller
     {
         // GET: evaluacion
-        public ActionResult Inicio()
+        public ActionResult EvDesempeno()
         {
             return View();
         }

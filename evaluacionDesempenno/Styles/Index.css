@@ -10,7 +10,7 @@
     --color-muniz-secundario: rgba(0,0,0,0.2);
 }
 
-.container {
+.Container {
     display: grid;
     width: 100%;
     background-color: rgb(219, 219, 223);

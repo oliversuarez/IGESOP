@@ -112,6 +112,7 @@
     <Content Include="Styles\controles.css" />
     <Content Include="Styles\Index.css" />
     <Content Include="Styles\Principal.css" />
+    <Content Include="Styles\Sistema.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +127,7 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\evaluacion\Inicio.cshtml" />
+    <Content Include="Views\Trabajador\EvDesempeno.cshtml" />
     <Content Include="Views\Sistema\Index.cshtml" />
     <Content Include="Views\Sistema\Principal.cshtml" />
     <None Include="Web.Debug.config">

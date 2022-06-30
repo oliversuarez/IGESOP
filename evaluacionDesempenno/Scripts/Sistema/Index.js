@@ -2,7 +2,9 @@
 btnAceptar.onclick = function () {
     var usuario = txtUsuario.value;
     var clave = txtClave.value;
-   
+
+    if (Validacion.ValidarRequeridos("R") == 0) return;
+
 
 digestMessage(clave)
     .then(
@@ -12,9 +14,13 @@ digestMessage(clave)
 }
 
 function mostrarRptaLogin(rpta) {
-    console.log(rpta);
-    //var url = hdfRaiz.value + 'Sistema/Principal';
-    //window.location.href = url;
+    if (validaResponseData(rpta)) {
+        sessionStorage.setItem("menu", rpta);
+        var url = hdfRaiz.value + 'Sistema/Principal';
+        window.location.href = url;
+       
+    }
+    
 }
 
 async function digestMessage(message) {

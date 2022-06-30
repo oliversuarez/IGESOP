@@ -7,7 +7,7 @@ var listaUsu;
 
 
 window.onload = function () {
-    Http.get("evaluacion/cargar", mostrarRpt);
+    Http.get("Trabajador/cargar", mostrarRpt);
 
     console.log("subida prueba :diego");
 }

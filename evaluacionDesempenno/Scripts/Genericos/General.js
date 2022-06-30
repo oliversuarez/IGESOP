@@ -7,30 +7,7 @@ var sepRegistros = '~';
 var sepLista = '^';
 var sepGrupoLista = '>|<';
 var sepComodin = '=';
-
-var contadorSessionActiva = 0;
-var contadorSessionLogout = 0;
-//var sessionActiva = setInterval(function () {
-//    contadorSessionActiva = contadorSessionActiva + 1;
-//    contadorSessionLogout = contadorSessionLogout + 1;
-//    console.log("SessionActiva :" +contadorSessionActiva);
-//    console.log("SessionLogout :"+contadorSessionLogout);
-//    //if (contadorSessionLogout == 10800) {
-//    if (contadorSessionLogout == 10800) {
-//        clearInterval(sessionActiva);
-//        var url = hdfRaiz.value + 'Sistema/Logout';
-//        window.location.href  = url;
-//    }
-//    if (contadorSessionActiva==600) {
-//        Http.get("Sistema/obtenerVersion", mostrarVersion);
-//        function mostrarVersion(rpta) {
-//            if (validaResponseData(rpta)) {
-//                console.log(rpta);
-//                contadorSessionActiva = 0;
-//            }
-//        }
-//    }
-//}, 1000);
+var tabindex = 0;
 
 var Http = (function () {
     function Http() {
@@ -74,11 +51,12 @@ var Http = (function () {
                 }
                 if (tipoRpta != null) callBack(xhr.response);
                 else callBack(xhr.responseText);
+
             }
         }
         if (data != null) xhr.send(data);
         else xhr.send();
-       
+
     }
     return Http;
 })();
@@ -86,7 +64,7 @@ var Http = (function () {
 var GUI = (function () {
     function GUI() {
     }
-    GUI.Combo = function (cbo, lista, primerItem,tieneItemCompuesto) {
+    GUI.Combo = function (cbo, lista, primerItem, tieneItemCompuesto) {
         var html = "";
         if (primerItem != null) {
             html += "<option value=''>";
@@ -115,7 +93,7 @@ var GUI = (function () {
     //agregado por diego
     GUI.ComboSeacrh = function (cboSearch, lista, texto = "SELECCIONE") {
 
-        var nlista = lista.length;   
+        var nlista = lista.length;
         var campos = [];
         var liarray = [];
         var nliarray;
@@ -123,7 +101,7 @@ var GUI = (function () {
         var matriz = [];
         var matrizFiltra = [];
         var nmatriz = 0;
-        
+
         html = "";
         var divContent = cboSearch.parentNode.parentNode.parentNode;
         var button = divContent.children[0].children[0].children[1];
@@ -135,14 +113,14 @@ var GUI = (function () {
         llenarlista();
         if (texto == "") texto = "SELECCIONE";
         spanText.innerHTML = texto;
-       
+
         divContent.onmouseleave = function () {
             if (contentlista.style.display == 'flex') {
                 togleseacrh();
             }
-            
+
         }
-       
+
         function llenarlista() {
             matriz = [];
             for (var i = 0; i < nlista; i++) {
@@ -160,7 +138,7 @@ var GUI = (function () {
                 html += "</li>";
             }
             listaul.innerHTML = html;
-     
+
             configurarcontroles();
         }
         button.onclick = function () {
@@ -183,7 +161,7 @@ var GUI = (function () {
                 //else {
                 //    liarray[i].style.display = "none";
                 //}
-                if (matriz[i][1].toLowerCase().indexOf(valor) > -1) {                
+                if (matriz[i][1].toLowerCase().indexOf(valor) > -1) {
                     matrizFiltra.push(matriz[i]);
                 }
             }
@@ -201,7 +179,7 @@ var GUI = (function () {
             configurarcontroles();
         }
 
-        listaul.onscroll = function(UiEvent){
+        listaul.onscroll = function (UiEvent) {
             console.log(UiEvent.detail);
         }
 
@@ -232,7 +210,7 @@ var GUI = (function () {
             }
         }
 
-        this.obtenerNombre = function(){
+        this.obtenerNombre = function () {
             return nombre;
         }
 
@@ -249,15 +227,15 @@ var GUI = (function () {
                 inputhidden.value = item[0];
                 nombre = item[1];
                 input.value = "";
-            }       
+            }
         }
 
         this.bloquearCombo = function () {
             divContent.disabled = true;
-             button.disabled = true;
-             spanText.disabled = true;
-             inputhidden.disabled = true;
-             input.disabled = true;
+            button.disabled = true;
+            spanText.disabled = true;
+            inputhidden.disabled = true;
+            input.disabled = true;
         }
 
         if (texto != "SELECCIONE") {
@@ -293,9 +271,8 @@ var GUI = (function () {
 
     GUI.Grilla = function (div, lista, id, botones, mensajeRegistros, indices, ayudas, tieneCheck, subtotales, registrosPagina, paginasBloque,
         tieneFiltros, tieneExportacion, tieneImprimir, tieneNuevoEditar, tieneEliminar, tieneCodigoOculto, listacheck,
-        tipoGrilla, tieneCheckCabecera, listaColorFila, listaColorTextoFila, indiceTipos, tieneCalculofiltroFueraGrilla,
-        listaBotonesAdicionales, listaMaxlenth) {
-        
+        tipoGrilla, tieneCheckCabecera, listaColorFila, listaColorTextoFila, indiceTipos, tieneCalculofiltroFueraGrilla, listaBotonesAdicionales, listaMaxlenth) {
+
         var matriz = [];
         var nRegistros = lista.length;
         var nCampos;
@@ -324,7 +301,7 @@ var GUI = (function () {
         //VALORES A TENER EN CUENTA
         //INDICE|NOMBRE_VALOR|COLOR
         listaColorTextoFila = (listaColorTextoFila == null ? false : listaColorTextoFila);
-         //VALORES A TENER EN CUENTA
+        //VALORES A TENER EN CUENTA
         //INDICE|NOMBRE_VALOR|COLOR
 
         indiceTipos = (indiceTipos == null ? [] : indiceTipos);
@@ -336,7 +313,7 @@ var GUI = (function () {
         //Checks
         var idsChecks = [];
         //agregado por diego
-        idsChecks = (listacheck != null ? listacheck :[]);
+        idsChecks = (listacheck != null ? listacheck : []);
         var filasChecks = [];
         //Ordenacion
         var tipoOrden = 0; //0: ascendente, 1: descendente
@@ -360,7 +337,7 @@ var GUI = (function () {
         }
 
         function crearTabla() {
-            var html = "";        
+            var html = "";
             // //contenido de boton Exportar
 
             html += "<div class='Mensaje' style='display: flex;flex-wrap: nowrap;align-items: center;'>";
@@ -373,7 +350,7 @@ var GUI = (function () {
             if (tieneFiltros) {
                 html += "<input type='button' id='btnBorrarFiltro";
                 html += id;
-                html += "' class='BotonL' value='Borrar Filtros'/>";
+                html += "' class='' value='Borrar Filtros'/>";
             }
             html += "</div>";
             html += "<table class='table'>";
@@ -392,16 +369,18 @@ var GUI = (function () {
                     html += "<input id='chkCabecera ";
                     html += id;
                     html += "' type='checkbox'/>";
-                }               
+                }
                 html += "</div>";
                 html += "</th>";
             }
             for (var j = 0; j < nCampos; j++) {
                 html += "<th style='";
-               /* html += 'max-widt*/
-                html += 'width:';
-                html += (+anchos[j]);
-                html += "px";
+                /* html += 'max-widt*/
+                if (tipoGrilla == "EDITABLE") {
+                    html += 'width:';
+                    html += (+anchos[j]);
+                    html += "px";
+                }
                 if (j == 0 && tieneCodigoOculto) {
                     html += ";display:none";
                 }
@@ -411,7 +390,7 @@ var GUI = (function () {
                     html += "<div style='justify-content: center;'>";
                 } else {
                     html += "<div>";
-                }        
+                }
                 html += "<span class='Enlace ";
                 html += id;
                 html += "' data-orden='";
@@ -422,10 +401,10 @@ var GUI = (function () {
                 /*        html += "&nbs*/
                 if (tipoGrilla != "EDITABLE") {
                     html += "<span></span>";
-                }             
+                }
                 html += "</div>";
                 if (tieneFiltros) {
-                  /*  html += "<br/>";*/
+                    /*  html += "<br/>";*/
                     if (indices.length > 0 && indices.indexOf(j) > -1) {
                         //if (indiceTipos != null) {
 
@@ -444,12 +423,12 @@ var GUI = (function () {
                         //    }
 
 
-                     /*   } else {*/
-                            html += "<select class='Cabecera Combo ";
-                            html += id;
-                            html += "'></select>";
-                    /*    }*/
-                       
+                        /*   } else {*/
+                        html += "<select class='Cabecera Combo ";
+                        html += id;
+                        html += "'></select>";
+                        /*    }*/
+
                     }
                     else {
                         html += "<input type='text' class='Cabecera Texto ";
@@ -577,11 +556,11 @@ var GUI = (function () {
                 //}
             }
             html += "</div>";
-             //contenido de boton Exportar
+            //contenido de boton Exportar
 
             div.innerHTML = html;
             if (indices.length > 0) llenarCombos();
-            if (tipoGrilla!="EDITABLE") configurarOrden();
+            if (tipoGrilla != "EDITABLE") configurarOrden();
         }
 
         function llenarCombos() {
@@ -591,7 +570,7 @@ var GUI = (function () {
 
                 GUI.Combo(combos[j], ayudas[j], "TODOS");
 
-               
+
 
             }
         }
@@ -601,14 +580,14 @@ var GUI = (function () {
                 var nCols = indices.length;
                 var inicio = indicePagina * registrosPagina;
                 for (var i = 0; i < nCols; i++) {
-                    var combos = document.getElementsByClassName("InputcboSeacrh " +id+indices[i]);
+                    var combos = document.getElementsByClassName("InputcboSeacrh " + id + indices[i]);
                     var ncombos = combos.length;
                     for (var j = 0; j < ncombos; j++) {
                         texto = matriz[inicio + j][indices[i]];
                         if (ayudas[i] != null && ayudas[i].length > 0) {
                             GUI.ComboSeacrh(combos[j], ayudas[i], texto);
                             combos[j].value = texto;
-                        } 
+                        }
                         combos[j].setAttribute("data-val", texto);
                         combos[j].setAttribute("data-col", indices[i]);
                         combos[j].setAttribute("data-row", j);
@@ -632,16 +611,16 @@ var GUI = (function () {
                             cambiarInputRegistro(id, this, this.getAttribute("data-col"), this.getAttribute("data-row"), matriz);
                         }
                     }
-                  
+
                 }
-             }
+            }
 
         }
 
         function configurarBotonesAdicionales() {
             var cantidadReg = nlistaBotonesAdicionales + nCampos + 2;
             var i = nCampos + 2;
-            for (i;i< cantidadReg; i++) {
+            for (i; i < cantidadReg; i++) {
                 var inputs = document.getElementsByClassName("btnBoton" + id + i);
                 var nInputs = inputs.length;
                 if (nInputs > 0) {
@@ -663,14 +642,14 @@ var GUI = (function () {
                 var inicio = indicePagina * registrosPagina;
                 var texto = "";
                 for (var i = 0; i < nCols; i++) {
-                    var combos = document.getElementsByClassName("Registro Combo "+id+indices[i]);
+                    var combos = document.getElementsByClassName("Registro Combo " + id + indices[i]);
                     var ncombos = combos.length;
                     for (var j = 0; j < ncombos; j++) {
                         texto = matriz[inicio + j][indices[i]];
-                        if (ayudas[i] != null && ayudas[i].length>0) {
-                            GUI.Combo(combos[j], ayudas[i]);                           
-                            combos[j].value = texto;                         
-                        } 
+                        if (ayudas[i] != null && ayudas[i].length > 0) {
+                            GUI.Combo(combos[j], ayudas[i]);
+                            combos[j].value = texto;
+                        }
                         combos[j].setAttribute("data-val", texto);
                         combos[j].setAttribute("data-col", indices[i]);
                         combos[j].setAttribute("data-row", j);
@@ -678,7 +657,7 @@ var GUI = (function () {
                             cambiarComboRegistro(id, this, this.getAttribute("data-col"), this.getAttribute("data-row"), matriz);
 
                         }
-                       
+
                     }
                 }
                 iniciarComboRegistro(id);
@@ -720,7 +699,7 @@ var GUI = (function () {
                         valores.push(cabeceras[j].value.toLowerCase());
                     }
                     else {
-                        valores.push(cabeceras[j].options[cabeceras[j].selectedIndex].value);
+                        valores.push(cabeceras[j].options[cabeceras[j].selectedIndex].text);
                     }
                 }
                 var exito = false;
@@ -733,7 +712,7 @@ var GUI = (function () {
                             exito = (valores[j] == "" || campos[j].toString().toLowerCase().indexOf(valores[j]) > -1);
                         }
                         else {
-                            exito = (valores[j] == "" || campos[j] == valores[j]);
+                            exito = (valores[j] == "TODOS" || campos[j] == valores[j]);
                         }
                         if (!exito) break;
                     }
@@ -747,14 +726,14 @@ var GUI = (function () {
                             if (esNumero) {
                                 fila.push(campos[j] * 1);
                             }
-                            else if (esFecha) {                             
-                                    fila.push(crearFecha(campos[j]));
-                             
+                            else if (esFecha) {
+                                fila.push(crearFecha(campos[j]));
+
                             }
                             else {
                                 fila.push(campos[j]);
                             }
-                            
+
                             if (subtotales.length > 0 && subtotales.indexOf(j) > -1) {
                                 valor = fila[j];
                                 if (esTime) {
@@ -772,10 +751,10 @@ var GUI = (function () {
         }
 
         function sumarHorasMinutos(tiempoAcumulado, tiempo) {
-            var listaTiempoAcumulado = tiempoAcumulado==0? [0,0]: tiempoAcumulado.split(":");
+            var listaTiempoAcumulado = tiempoAcumulado == 0 ? [0, 0] : tiempoAcumulado.split(":");
             var listaTiempo = tiempo == 0 ? [0, 0] : tiempo.split(":");
             var totalMinutos = listaTiempoAcumulado[1] * 1 + listaTiempo[1] * 1;
-            var horas = listaTiempoAcumulado[0] * 1 + listaTiempo[0] * 1 + parseInt(totalMinutos/60);
+            var horas = listaTiempoAcumulado[0] * 1 + listaTiempo[0] * 1 + parseInt(totalMinutos / 60);
             var minutos = (totalMinutos % 60);
             var time = horas.toString().padStart(2, "0") + ":" + minutos.toString().padStart(2, "0");
             return time;
@@ -788,19 +767,19 @@ var GUI = (function () {
 
                 var fechas = strFecha.split(" ");
                 var fecha = fechas[0].split("/");
-                var hms=[];
-                var ampm="";
+                var hms = [];
+                var ampm = "";
                 var hora = 0;
                 var min = 0;
                 var seg = 0;
                 if (fechas.length > 1) {
-                     hms = fechas[1].split(":");
-                     ampm = fechas[2];
+                    hms = fechas[1].split(":");
+                    ampm = fechas[2];
                     if (hms.length > 1) {
-                         hora = hms[0] * 1;
+                        hora = hms[0] * 1;
                         if (ampm == "PM") hora = hora + 12;
-                         min = hms[1] * 1;
-                         seg = hms[2] * 1;
+                        min = hms[1] * 1;
+                        seg = hms[2] * 1;
                     }
                 }
 
@@ -820,17 +799,17 @@ var GUI = (function () {
                 var hora = 0;
                 var min = 0;
                 var seg = 0;
-                if (fechas.length>1) {
-                     hms = fechas[1].split(":");
-                     ampm = fechas[2];
+                if (fechas.length > 1) {
+                    hms = fechas[1].split(":");
+                    ampm = fechas[2];
                     if (hms.length > 1) {
-                         hora = hms[0] * 1;
+                        hora = hms[0] * 1;
                         if (ampm == "PM") hora = hora + 12;
-                         min = hms[1] * 1;
-                         seg = hms[2] * 1;
+                        min = hms[1] * 1;
+                        seg = hms[2] * 1;
                     }
                 }
-                
+
 
                 var anio = Number(fecha[0]);
                 var mes = +fecha[1] - 1;
@@ -839,12 +818,12 @@ var GUI = (function () {
                 return fechaDMY;
             }
 
-           
+
 
 
         }
 
-        function mostrarMatriz(nuevaFila = false,inicioRecarga) {
+        function mostrarMatriz(nuevaFila = false, inicioRecarga) {
             var html = "";
             var nRegMatriz = matriz.length;
             var esNumero = false;
@@ -855,8 +834,8 @@ var GUI = (function () {
             var fin = inicio + registrosPagina;
             //agregado por diego
             var i;
-            
-          
+
+
             if (nuevaFila) {
                 i = nRegMatriz - 1;
             }
@@ -878,8 +857,8 @@ var GUI = (function () {
                         var nlistaColorFila = listaColorFila.length;
                         var lcolorCamp;
                         for (var x = 0; x < nlistaColorFila; x++) {
-                           //lcolorCamp = nlistaColorFila[x].split('|');
-                             lcolorCamp = listaColorFila[x];
+                            //lcolorCamp = nlistaColorFila[x].split('|');
+                            lcolorCamp = listaColorFila[x];
                             if (matriz[i][lcolorCamp[0]] == lcolorCamp[1]) {
                                 html += lcolorCamp[2];
                             }
@@ -891,14 +870,14 @@ var GUI = (function () {
                         var nlistaColorTextoFila = listaColorTextoFila.length;
                         var lcolorCamp;
                         for (var x = 0; x < nlistaColorTextoFila; x++) {
-                             // lcolorCamp = listaColorTextoFila[x].split('|');
-                           lcolorCamp = listaColorTextoFila[x];
+                            // lcolorCamp = listaColorTextoFila[x].split('|');
+                            lcolorCamp = listaColorTextoFila[x];
                             if (matriz[i][lcolorCamp[0]] == lcolorCamp[1]) {
                                 html += lcolorCamp[2];
                             }
                         }
                         html += ";";
-                       
+
                     }
                     html += "'>";
                     if (tieneCheck) {
@@ -946,21 +925,27 @@ var GUI = (function () {
                                         switch (indiceTipos[j]) {
                                             case 'cbo':
                                                 html += "<select class='GE Registro Combo ";
-                                                html += id;                                              
+                                                html += id;
                                                 html += j;
                                                 if (!nuevaFila) {
-                                                    html +=" colorDisabled "
+                                                    html += " colorDisabled "
                                                 }
                                                 html += "' ";
                                                 if (!nuevaFila) {
                                                     html += "disabled";
                                                 }
-                                                html+=" ></select > ";
+                                                html += "  tabindex='";
+                                                tabindex = tabindex + 1;
+                                                html += tabindex;
+                                                html += "'></select>";
                                                 break;
                                             case 'cbs':
                                                 html += "<div class='cbosearch";
                                                 //html +=  j;
-                                                html += "' style='width:100%;'>";
+                                                html += "' style='width:100%;'  tabindex='";
+                                                tabindex = tabindex + 1;
+                                                html += tabindex;
+                                                html += "'>";
                                                 html += "<div class='content_seacrh_button'>";
                                                 html += "<div class='GE ";
                                                 if (!nuevaFila) {
@@ -971,7 +956,7 @@ var GUI = (function () {
                                                 if (!nuevaFila) {
                                                     html += " colorDisabled "
                                                 }
-                                                html +="input_text'>";
+                                                html += "input_text'>";
                                                 html += matriz[i][j];
                                                 html += "</span> ";
                                                 html += "<div class='button_seacrh'>▲</div>";
@@ -984,7 +969,7 @@ var GUI = (function () {
                                                 if (!nuevaFila) {
                                                     html += "disabled";
                                                 }
-                                                html +=" disabled/>";
+                                                html += "/>";
                                                 html += "</div>";
                                                 html += "<div class='content_seacrh' style='display: none;'>";
                                                 html += " <input type='text' class='input_seacrh' placeholder='escriba aqui' />";
@@ -1003,35 +988,38 @@ var GUI = (function () {
                                         if (!nuevaFila) {
                                             html += " colorDisabled "
                                         }
-                                        html +=" Cabecera Combo ";
+                                        html += " Cabecera Combo ";
                                         html += id;
                                         html += "'  ";
                                         if (!nuevaFila) {
                                             html += "disabled";
                                         }
-                                        html +="></select>";
+                                        html += " tabindex='";
+                                        tabindex = tabindex + 1;
+                                        html += tabindex;
+                                        html += "'></select>";
                                     }
 
                                 }
-                                else {                             
+                                else {
                                     switch (indiceTipos[j]) {
                                         case "tme":
-                                            html += "<input type='Time' style='width:100%'  class='GE ";
+                                            html += "<input type='time' style='width:100%'  class='without_ampm GE ";
                                             if (!nuevaFila) {
                                                 html += " colorDisabled "
                                             }
-                                            html +=" Registro Input ";
+                                            html += " Registro Input ";
                                             html += id;
                                             html += j;
                                             html += "' data-row='";
                                             html += i;
                                             html += "' data-col='";
                                             html += j;
-                                            html+="' data-val='";
+                                            html += "' data-val='";
                                             if (esDecimal) html += matriz[i][j].toFixed(2);
                                             else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
                                             else html += matriz[i][j];
-                                            html+="' value='";
+                                            html += "' value='";
                                             if (esDecimal) html += matriz[i][j].toFixed(2);
                                             else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
                                             else html += matriz[i][j];
@@ -1039,7 +1027,10 @@ var GUI = (function () {
                                             if (!nuevaFila) {
                                                 html += "disabled";
                                             }
-                                            html +="/>";
+                                            html += " tabindex='";
+                                            tabindex = tabindex + 1;
+                                            html += tabindex;
+                                            html += "'/>";
                                             break;
                                         case "lbl":
                                             html += "<label style='width:100%' class='GE Registro Input ";
@@ -1058,7 +1049,7 @@ var GUI = (function () {
                                             else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
                                             else html += matriz[i][j];
                                             html += "</label>";
-                                        
+
                                             break;
                                         case "hdn":
                                             html += "<input type='text' style='width:100%' class=' ";
@@ -1086,36 +1077,8 @@ var GUI = (function () {
                                             }
                                             html += "/>";
                                             break;
-                                        case "nro":
+                                        default:
                                             html += "<input type='text' style='width:100%' maxlength='";
-                                            html += listaMaxlenth[j];
-                                            html += "' class='valCharEsp Upper GE N ";
-                                            if (!nuevaFila) {
-                                                html += " colorDisabled "
-                                            }
-                                            html += " Registro Input ";
-                                            html += id;
-                                            html += i;
-                                            html += "' data-row='";
-                                            html += i;
-                                            html += "' data-col='";
-                                            html += j;
-                                            html += "' data-val='";
-                                            if (esDecimal) html += matriz[i][j].toFixed(2);
-                                            else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
-                                            else html += html_escape(matriz[i][j]);
-                                            html += "' value='";
-                                            if (esDecimal) html += matriz[i][j].toFixed(2);
-                                            else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
-                                            else html += html_escape(matriz[i][j]);
-                                            html += "' ";
-                                            if (!nuevaFila) {
-                                                html += "disabled";
-                                            }
-                                            html += "/>";
-                                            break;
-                                        case "fec":
-                                            html += "<input type='date' style='width:100%' maxlength='";
                                             html += listaMaxlenth[j];
                                             html += "' class='valCharEsp Upper GE ";
                                             if (!nuevaFila) {
@@ -1131,44 +1094,19 @@ var GUI = (function () {
                                             html += "' data-val='";
                                             if (esDecimal) html += matriz[i][j].toFixed(2);
                                             else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
-                                            else html += matriz[i][j];
+                                            else html += html_escape(matriz[i][j]);
                                             html += "' value='";
                                             if (esDecimal) html += matriz[i][j].toFixed(2);
                                             else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
-                                            else html += matriz[i][j];
+                                            else html += html_escape(matriz[i][j]);
                                             html += "'  ";
                                             if (!nuevaFila) {
                                                 html += "disabled";
                                             }
-                                            html += "/>";
-                                            break;
-                                        default:
-                                            html += "<input type='text' style='width:100%' maxlength='";
-                                            html += listaMaxlenth[j];
-                                            html +="' class='valCharEsp Upper GE ";
-                                            if (!nuevaFila) {
-                                                html += " colorDisabled "
-                                            }
-                                            html +=" Registro Input ";
-                                            html += id;
-                                            html += i;
-                                            html += "' data-row='";
-                                            html += i;
-                                            html += "' data-col='";
-                                            html += j;
-                                            html += "' data-val='";
-                                            if (esDecimal) html += matriz[i][j].toFixed(2);
-                                            else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
-                                            else html += matriz[i][j];
-                                            html += "' value='";
-                                            if (esDecimal) html += matriz[i][j].toFixed(2);
-                                            else if (esFecha) html += mostrarFechaDMY(matriz[i][j]);
-                                            else html += matriz[i][j];
-                                            html += "'  ";
-                                            if (!nuevaFila) {
-                                                html += "disabled";
-                                            }
-                                            html +="/>";
+                                            html += " tabindex='";
+                                            tabindex = tabindex + 1;
+                                            html += tabindex;
+                                            html += "'/>";
                                             break;
                                     }
                                 }
@@ -1182,7 +1120,7 @@ var GUI = (function () {
                             default:
                         }
                         //grilla editable
-                      
+
                         html += "</td>";
                     }
                     if (nBotones > 0) {
@@ -1218,24 +1156,20 @@ var GUI = (function () {
                         for (var k = 0; k < nlistaBotonesAdicionales; k++) {
                             html += "<td style='width:50px' class='Mostrar'>";
                             html += "<img class='Icono Centro  btnBoton";
-                            html += id + (j + k + 2)*1;
+                            html += id + (j + k + 2) * 1;
                             html += "' src='";
                             html += hdfRaiz.value;
                             html += listaBotonesAdicionales[k][0];
                             html += "' data-row='";
                             html += i;
                             html += "' data-col='";
-                            html += j+k+2;
+                            html += j + k + 2;
                             html += "'  title='";
                             html += listaBotonesAdicionales[k][1];
                             html += "'/> ";
                             html += "</td>";
                         }
                     }
-
-
-
-
                     html += "</tr>";
                 }
                 else break;
@@ -1244,7 +1178,7 @@ var GUI = (function () {
 
             var tbData = document.getElementById("tbData" + id);
             if (nuevaFila) {
-                if (tbData != null) tbData.insertAdjacentHTML('beforeend',html);
+                if (tbData != null) tbData.insertAdjacentHTML('beforeend', html);
             }
             else {
                 if (inicioRecarga != null) {
@@ -1253,7 +1187,7 @@ var GUI = (function () {
                 else {
                     if (tbData != null) tbData.innerHTML = html;
                 }
-           
+
             }
 
             var spTotal = document.getElementById("spnTotal" + id);
@@ -1281,22 +1215,21 @@ var GUI = (function () {
             configurarPaginacion();
             if (tipoGrilla == 'EDITABLE') {
                 llenarCombosGrilla();
-               
                 llenarCombosSearch();
                 configurarInputGrilla();
             }
-            
+
         }
-    
+
 
         function mostrarFechaDMY(fecha) {
             if (fecha == "") return "";
             var anio = fecha.getFullYear();
             var mes = fecha.getMonth() + 1;
-            mes = (mes<10 ? "0" + mes.toString() : mes.toString());
+            mes = (mes < 10 ? "0" + mes.toString() : mes.toString());
             var dia = fecha.getDate();
             dia = (dia < 10 ? "0" + dia.toString() : dia.toString());
-            
+
             var hora = fecha.getHours();
             var strFecha = "";
             if (hora == 0) {
@@ -1312,7 +1245,7 @@ var GUI = (function () {
                 var seg = fecha.getSeconds();
                 strFecha = dia + "/" + mes + "/" + anio + " " + hora + ":" + min + ":" + seg + " " + ampm;
             }
-          
+
             return strFecha;
         }
 
@@ -1342,10 +1275,10 @@ var GUI = (function () {
                     }
                     this.className = "FilaSeleccionada " + id;
                     filaActual = this;
-                  seleccionarFila(id, idRegistro, this,n);
+                    seleccionarFila(id, idRegistro, this, n);
                 }
 
-               
+
             }
 
             var cabeceras = document.getElementsByClassName("Cabecera " + id);
@@ -1397,11 +1330,20 @@ var GUI = (function () {
                 btnExportarXlsx.onclick = function () {
                     var archivo = id + ".xlsx";
                     var data = obtenerData("¬", "|", true);
-                    var SubTotalExpoExel = (typeof(tieneSubTotalExportar) == 'undefined' ? "" : tieneSubTotalExportar);
+                    var SubTotalExpoExel = (typeof (tieneSubTotalExportar) == 'undefined' ? "" : tieneSubTotalExportar);
                     var frm = new FormData();
                     frm.append("Data", data);
-                    Http.postDownload("Exportacion/Exportar?archivo=" + archivo + "&entrada=" + SubTotalExpoExel , function (rpta) {
-                        FileSystem.download(rpta, archivo);
+                    Http.postDownload("Exportacion/Exportar?archivo=" + archivo + "&entrada=" + SubTotalExpoExel, function (rpta) {
+
+                        if (rpta.byteLength != 0) {
+                            FileSystem.download(rpta, archivo);
+                        } else {
+                            alerta(["Sesion Expirada", 'advertencia']);
+                            setTimeout(() => {
+                                window.location.href = hdfRaiz.value + "Sistema/Login";
+                            }, 700)
+                        }
+
                     }, frm);
                 }
             }
@@ -1411,11 +1353,20 @@ var GUI = (function () {
                 btnExportarDocx.onclick = function () {
                     var archivo = id + ".docx";
                     var data = obtenerData("¬", "|", true);
-                    var SubTotalExpoDoc = (typeof(tieneSubTotalExportar) == 'undefined' ? "" : tieneSubTotalExportar);
+                    var SubTotalExpoDoc = (typeof (tieneSubTotalExportar) == 'undefined' ? "" : tieneSubTotalExportar);
                     var frm = new FormData();
                     frm.append("Data", data);
                     Http.postDownload("Exportacion/Exportar?archivo=" + archivo + "&entrada=" + SubTotalExpoDoc, function (rpta) {
-                        FileSystem.download(rpta, archivo);
+                        if (rpta.byteLength != 0) {
+                            FileSystem.download(rpta, archivo);
+                        } else {
+                            alerta(["Sesion Expirada", 'advertencia']);
+                            setTimeout(() => {
+                                window.location.href = hdfRaiz.value + "Sistema/Login";
+                            }, 700)
+                        }
+
+
                     }, frm);
                 }
             }
@@ -1428,7 +1379,14 @@ var GUI = (function () {
                     var frm = new FormData();
                     frm.append("Data", data);
                     Http.postDownload("Exportacion/Exportar?archivo=" + archivo, function (rpta) {
-                        FileSystem.download(rpta, archivo);
+                        if (rpta.byteLength != 0) {
+                            FileSystem.download(rpta, archivo);
+                        } else {
+                            alerta(["Sesion Expirada", 'advertencia']);
+                            setTimeout(() => {
+                                window.location.href = hdfRaiz.value + "Sistema/Login";
+                            }, 700)
+                        }
                     }, frm);
                 }
             }
@@ -1529,7 +1487,7 @@ var GUI = (function () {
                                 filasChecks.splice(pos, 1);
                             }
                         }
-                        seleccionarCheck(cod, fila,seleccionado);
+                        seleccionarCheck(cod, fila, seleccionado);
                     }
                 }
 
@@ -1611,7 +1569,7 @@ var GUI = (function () {
                 ///
                 matriz.sort(ordenarMatriz);
                 ///
-                 
+
             }
             else {
                 if (simbolo == "▲") {
@@ -1631,7 +1589,7 @@ var GUI = (function () {
             var enlaces = document.getElementsByClassName("Enlace " + id);
             var nEnlaces = enlaces.length;
             for (var j = 0; j < nEnlaces; j++) {
-               /* enlaces[j].nextSibling.nextSibling.innerHTML = "";*/
+                /* enlaces[j].nextSibling.nextSibling.innerHTML = "";*/
                 enlaces[j].nextSibling.innerHTML = "";
             }
         }
@@ -1675,7 +1633,7 @@ var GUI = (function () {
                     }
                     else break;
                 }
-                if (indiceBloque < (totalBloques-1)) {
+                if (indiceBloque < (totalBloques - 1)) {
                     html += "<button class='Pag ";
                     html += id;
                     html += " Pagina' data-pag='-3'>";
@@ -1758,7 +1716,7 @@ var GUI = (function () {
             mostrarMatriz();
         }
 
-        this.ObtenerMatriz = function() {
+        this.ObtenerMatriz = function () {
             return matriz;
         }
 
@@ -1853,7 +1811,7 @@ var GUI = (function () {
             return filaActual;
         }
 
-        this.llenarDataMatrizDesdePos = function (pos){
+        this.llenarDataMatrizDesdePos = function (pos) {
             mostrarMatriz(true, pos);
         }
 
@@ -1864,7 +1822,7 @@ var GUI = (function () {
                 var tipo;
                 var esDecimal;
                 var esTime;
-                
+
                 totales = [];
                 var ccs = 0;
                 for (var j = 0; j < nSubtotales; j++) {
@@ -1873,8 +1831,8 @@ var GUI = (function () {
                 for (var i = 0; i < nRegMatriz; i++) {
                     ccs = 0;
                     for (var j = 0; j < nCampos; j++) {
-                        if (subtotales.length > 0 && subtotales.indexOf(j) > -1) { 
-                           esTime = (tipos[j].indexOf("Time") > -1);
+                        if (subtotales.length > 0 && subtotales.indexOf(j) > -1) {
+                            esTime = (tipos[j].indexOf("Time") > -1);
                             if (esTime) {
                                 totales[ccs] = sumarHorasMinutos(totales[ccs], matriz[i][j]);
                             } else {
@@ -1883,7 +1841,7 @@ var GUI = (function () {
                             ccs++;
                         }
                     }
-                }        
+                }
                 for (var j = 0; j < nSubtotales; j++) {
                     var celdaSubtotal = document.getElementById("total" + id + subtotales[j]);
                     if (celdaSubtotal != null) {
@@ -2029,7 +1987,7 @@ var GUI = (function () {
                     break;
 
                 case "div":
-                    controles[i].innerHTML="";
+                    controles[i].innerHTML = "";
                     break;
                 case "lbl":
                     controles[i].innerHTML = "";
@@ -2045,15 +2003,16 @@ var GUI = (function () {
         var nControles = controles.length;
         for (var i = 0; i < nControles; i++) {
             if (i < valoresMostrar.length) {
-               
+
                 var tipocontrol = controles[i].id.substr(0, 3);
                 switch (tipocontrol) {
                     case "cbs":
-                        var listaElementos = controles[i].parentNode.parentNode.children[1].children[1];
-                        var texto = controles[i].parentNode.children[0];
-                        var textoElemento = listaElementos.querySelectorAll('[data-item=' + '"' + valoresMostrar[i] + '"' + ']');
-                        texto.innerHTML = textoElemento[0].innerHTML;
-                        controles[i].value = valoresMostrar[i];
+                        //var listaElementos = controles[i].parentNode.parentNode.children[1].children[1];
+                        //var texto = controles[i].parentNode.children[0];
+                        //var textoElemento = listaElementos.querySelectorAll('[data-item=' + '"' + valoresMostrar[i] + '"' + ']');
+                        //texto.innerHTML = textoElemento[0].innerHTML;
+                        controles[i].SetValor(valoresMostrar[i]);
+                        /*controles[i].value = valoresMostrar[i];*/
                         break;
                     case "div":
                         controles[i].innerHTML = valoresMostrar[i];
@@ -2074,7 +2033,7 @@ var GUI = (function () {
         var matrizDetalle = [];
         //agregado tieneNuevoEditar
         tieneNuevoEditar = (tieneNuevoEditar == null ? false : tieneNuevoEditar);
-      
+
         //agregado
         var campos = [];
         var pos = 3;
@@ -2109,7 +2068,7 @@ var GUI = (function () {
             //    html += "</span>";
             //    html += "</div>";
             //}
-           /* else html += cabeceraCampos[j];*/
+            /* else html += cabeceraCampos[j];*/
             html += "</th>";
         }
         //agregado 
@@ -2127,7 +2086,7 @@ var GUI = (function () {
         html += "</thead>";
         html += "<tbody class='tbody' id='tbData";
         html += id;
-        html +="'>";
+        html += "'>";
         html += "</tbody>";
         html += "</table>";
         div.innerHTML = html;
@@ -2191,17 +2150,17 @@ var GUI = (function () {
                 }
             }
             var tbl = document.getElementById("tbData" + id);
-            if (tbl!=null) tbl.innerHTML = html;
+            if (tbl != null) tbl.innerHTML = html;
         }
 
         configurarExpandirColapsar();
 
         var btnsTrewViewAdd = document.getElementsByClassName("treviewAdd" + id);
         if (btnsTrewViewAdd != null) {
-            var nbtnsTrewViewAdd= btnsTrewViewAdd.length;
+            var nbtnsTrewViewAdd = btnsTrewViewAdd.length;
             for (var j = 0; j < nbtnsTrewViewAdd; j++) {
                 btnsTrewViewAdd[j].onclick = function () {
-                  
+
                     AgregarTrewViewRegistro();
                 }
             }
@@ -2240,7 +2199,7 @@ var GUI = (function () {
                 if (j == 0 && detallecodigoOculto) {
                     html += ";display:none";
                 }
-                html +="'>";
+                html += "'>";
                 html += detalleCampos[j];
                 html += "</th>";
             }
@@ -2250,7 +2209,7 @@ var GUI = (function () {
             var tipoCabecera = "";
             for (var i = pos; i < nRegDetalles; i++) {
                 campos = listaDetalle[i].split("|");
-                
+
 
                 tipoCabecera = campos[posCampo];
                 if (tipoCabecera == idCabecera) {
@@ -2583,7 +2542,7 @@ var GUI = (function () {
         }
     }
 
-    GUI.TreeView = function(div, lista, raiz, check) {
+    GUI.TreeView = function (div, lista, raiz, check) {
         check = (check == null ? false : check);
         var html = "<ul id='ulMenu' style='cursor:pointer'>";
         html += "<li>";
@@ -2724,17 +2683,15 @@ var Validacion = (function () {
         var c = 0;
         for (var i = 0; i < nControles; i++) {
             var tipocontrol = controles[i].tagName;
-             
+
             switch (tipocontrol) {
                 case "DIV":
-                if (controles[i].innerHTML == "")
-                {
-                    controles[i].style.border = "red 1px solid";
-                    c++
-                } else
-                {
-                    controles[i].style.border = "";
-                }
+                    if (controles[i].innerHTML == "") {
+                        controles[i].style.border = "red 1px solid";
+                        c++
+                    } else {
+                        controles[i].style.border = "";
+                    }
                     break;
                 case "SPAN":
                     if (controles[i].innerHTML == "") {
@@ -2774,9 +2731,9 @@ var Validacion = (function () {
                             controles[i].parentNode.style.border = "";
                         }
                     }
-               
+
             }
-            
+
             //if (controles[i].value == "") {
             //    controles[i].style.borderColor = "red";
             //    c++;
@@ -2786,16 +2743,14 @@ var Validacion = (function () {
             //}
         }
         /*  if (c > 0) span.innerHTML = "Los campos en Borde Rojo son Requeridos";*/
-        if (c > 0) alerta([["Los campos en borde rojo son requeridos","advertencia"]]);
-       /* else span.innerHTML = "";*/
-        return(c == 0);
+        if (c > 0) alerta([["Los campos en borde rojo son requeridos", "advertencia"]]);
+        /* else span.innerHTML = "";*/
+        return (c == 0);
     }
-
-
-    Validacion.ValidarNumeros = function (claseNum, div) {
+    Validacion.ValidarNumeros = function (claseNum, span) {
         if (claseNum == null) claseNum = "N";
-        if (div == null) div = document;
-        var controles = div.getElementsByClassName(claseNum);
+        if (span == null) span = spnMensaje
+        var controles = document.getElementsByClassName(claseNum);
         var nControles = controles.length;
         var c = 0;
         for (var i = 0; i < nControles; i++) {
@@ -2807,10 +2762,10 @@ var Validacion = (function () {
                 controles[i].style.borderColor = "";
             }
         }
-        if (c > 0) alerta([["Los campos en borde rojo son requeridos", "advertencia"]]);
+        if (c > 0) span.innerHTML = "Los campos en Borde Azul son Numeros";
+        else span.innerHTML = "";
         return (c == 0);
     }
-
     Validacion.ValidarNumerosEnLinea = function (claseNum, div) {
         if (div == null) div = document;
         if (claseNum == null) claseNum = "N";
@@ -2828,7 +2783,6 @@ var Validacion = (function () {
             }
         }
     }
-
     String.prototype.removeCharAt = function (i) {
         var tmp = this.split('');
         tmp.splice(i - 1, 1);
@@ -2964,7 +2918,7 @@ var Impresion = (function () {
 var Popup = (function () {
     function Popup() {
     }
-    Popup.CrearPopup = function (popup,div){
+    Popup.CrearPopup = function (popup, div) {
         var html = "";
         var nregistros = popup.length;
         var campos = [];
@@ -2974,7 +2928,7 @@ var Popup = (function () {
         for (var i = 1; i < nregistros; i++) {
             campos = popup[i].split("|");
             tipoControl = campos[1].substr(0, 3);
-            esFilaOculta = (tipoControl=="hdf");
+            esFilaOculta = (tipoControl == "hdf");
             html += "<div class='PopupWindowBoque grid_12'";
             if (esFilaOculta) html += " style='display:none'";
             html += ">";
@@ -3009,11 +2963,14 @@ var Popup = (function () {
                     html += campos[2];
                     html += "px' maxlength='";
                     html += campos[5];
-                    html +="' class='";
+                    html += "' class='";
                     html += campos[3];
                     html += "' data-campo='";
                     html += campos[4];
-                    html += "'/>";
+                    html += "' tabindex='";
+                    tabindex = tabindex + 1;
+                    html += tabindex;
+                    html += "'/> ";
                     break;
                 case "dtp":
                     html += "<input type='date' id='";
@@ -3025,7 +2982,10 @@ var Popup = (function () {
                     html += campos[3];
                     html += "' data-campo='";
                     html += campos[4];
-                    html += "'/>";
+                    html += "' tabindex='";
+                    tabindex = tabindex + 1;
+                    html += tabindex;
+                    html += "'/> ";
                     break;
                 case "cbo":
                     html += "<select id='";
@@ -3037,6 +2997,9 @@ var Popup = (function () {
                     html += campos[3];
                     html += "' data-campo='";
                     html += campos[4];
+                    html += "' tabindex='";
+                    tabindex = tabindex + 1;
+                    html += tabindex;
                     html += "'></select>"
 
                     break;
@@ -3046,11 +3009,14 @@ var Popup = (function () {
                     html += campos[2];
                     html += "px' id='cbosearch";
                     html += campos[1];
-                    html += "'>";
+                    html += "' tabindex='";
+                    tabindex = tabindex + 1;
+                    html += tabindex;
+                    html += "'> ";
                     html += "<div class='content_seacrh_button'>";
                     html += "<div class='content_button'>";
                     html += "<span type='text' class='input_text";
-                    html +="'></span> ";
+                    html += "'></span> ";
                     html += "<div class='button_seacrh'>▲</div>";
                     html += "<input type='hidden' value='' id='";
                     html += campos[1];
@@ -3077,7 +3043,7 @@ var Popup = (function () {
         } else {
             divPopup.innerHTML = html;
         }
-     
+
     }
 
     Popup.Resize = function (popup, ancho, alto) {
@@ -3087,7 +3053,7 @@ var Popup = (function () {
         popup.style.top = ((100 - alto) / 2) + "%";
     }
 
-    Popup.ConfigurarArrastre = function(divPopupContainer, divPopupWindow, divBarra) {
+    Popup.ConfigurarArrastre = function (divPopupContainer, divPopupWindow, divBarra) {
         divBarra.draggable = true;
         divBarra.ondragstart = function (event) {
             var ancho = getComputedStyle(divPopupWindow, null).getPropertyValue("left");
@@ -3123,7 +3089,7 @@ var Popup = (function () {
 var Speech = (function () {
     function Speech() {
     }
-    Speech.Recognition = function() {
+    Speech.Recognition = function () {
         if ('webkitSpeechRecognition' in window) {
             var recognizing = false;
             var recognition = new webkitSpeechRecognition();
@@ -3168,7 +3134,7 @@ var Speech = (function () {
             }
         }
     }
-    Speech.Synthesis = function(texto) {
+    Speech.Synthesis = function (texto) {
         speechSynthesis.speak(new SpeechSynthesisUtterance(texto));
     }
     return Speech;
@@ -3277,7 +3243,7 @@ window.Chart = Chart;
 var formulario = (function () {
     function formulario() {
     }
-    formulario.CrearFormulario = function (formulario,div) {
+    formulario.CrearFormulario = function (formulario, div) {
         var html = "";
         var nregistros = formulario.length;
         var campos = [];
@@ -3289,13 +3255,13 @@ var formulario = (function () {
         html += "<div class='form_basic_horizontal grid_12 grid_start p0'>";
         for (var i = 0; i < nbloques; i++) {
             html += "<div class='form_basic_horizontal grid_12 grid_start p0'>";
-            for (var j= 2; j < nregistros; j++) {
+            for (var j = 2; j < nregistros; j++) {
                 campos = formulario[j].split("|");
                 if (campos[6] == camposBloques[i]) {
                     tipoControl = campos[1].substr(0, 3);
                     esFilaOculta = (tipoControl == "hdf");
 
-                    if (tipoControl == "swt" || tipoControl== "btn") {
+                    if (/*tipoControl == "swt" || */tipoControl == "btn") {
                         html += "<div class='form_basic_horizontal_permanent ";
                     }
                     else {
@@ -3319,19 +3285,19 @@ var formulario = (function () {
                             default:
                                 html += "form_2_column ";
                         }
-                     
+
                     }
-                   
+
                     html += campos[7];
-                    html +=" ";
+                    html += " ";
                     html += campos[8];
-                        html += "'";
-                        if (esFilaOculta) html += " style='display:none'";
+                    html += "'";
+                    if (esFilaOculta) html += " style='display:none'";
                     html += ">";
-                    if (tipoControl != "swt" && tipoControl != "btn") {
+                    if (/*tipoControl != "swt" && */tipoControl != "btn") {
                         html += "<div class='texto'>";
                         html += campos[0];
-                        html += "</div>";                      
+                        html += "</div>";
                     }
 
                     switch (tipoControl) {
@@ -3345,7 +3311,7 @@ var formulario = (function () {
                             html += "'/>";
                             break;
                         case "txt":
-                            html += "<input type='text' id='";
+                            html += "<input type='text'  id='";
                             html += campos[1];
                             html += "' style='max-width:";
                             html += campos[2];
@@ -3355,7 +3321,10 @@ var formulario = (function () {
                             html += campos[3];
                             html += "' data-campo='";
                             html += campos[4];
-                            html += "'/>";
+                            html += "' tabindex='";
+                            tabindex = tabindex + 1;
+                            html += tabindex;
+                            html += "'/> ";
                             break;
                         case "btn":
                             html += "<input type='button' id='";
@@ -3369,6 +3338,9 @@ var formulario = (function () {
                             html += campos[4];
                             html += "' class='";
                             html += campos[3];
+                            html += "' tabindex='";
+                            tabindex = tabindex + 1;
+                            html += tabindex;
                             html += "'/>";
                             break;
                         case "cbo":
@@ -3381,6 +3353,9 @@ var formulario = (function () {
                             html += campos[3];
                             html += "' data-campo='";
                             html += campos[4];
+                            html += "' tabindex='";
+                            tabindex = tabindex + 1;
+                            html += tabindex;
                             html += "'></select>"
 
                             break;
@@ -3388,7 +3363,10 @@ var formulario = (function () {
                         case "cbs":
                             html += "<div id='cbosearch";
                             html += campos[1];
-                            html += "' class='grid_12'>";
+                            html += "' class='grid_12'  tabindex='";
+                            tabindex = tabindex + 1;
+                            html += tabindex;
+                            html += "'>";
                             html += "<div class='content_seacrh_button'>";
                             html += "<div class='content_button'>";
                             html += "<span type='text' class='input_text";
@@ -3417,10 +3395,13 @@ var formulario = (function () {
                             html += campos[2];
                             html += "px' maxlength='";
                             html += campos[5];
-                            html += "' class='";
+                            html += "' class='without_ampm ";
                             html += campos[3];
                             html += "' data-campo='";
                             html += campos[4];
+                            html += "' tabindex='";
+                            tabindex = tabindex + 1;
+                            html += tabindex;
                             html += "'/>";
 
                             break;
@@ -3435,12 +3416,16 @@ var formulario = (function () {
                             html += campos[3];
                             html += "' data-campo='";
                             html += campos[4];
+                            html += "' tabindex='";
+                            tabindex = tabindex + 1;
+                            html += tabindex;
                             html += "'></textarea>"
                             break;
                         case "swt":
-                            html += " <div class='form_basic_horizontal  grid_center grid_12'>";
+                            var textos = campos[4].split(sepComodin);
+                            html += " <div class='form_basic_horizontal  grid_start grid_12'>";
                             html += " <div class='navigation_nav_last'>";
-                            html += campos[0];
+                            html += textos[0];
                             html += "</div >";
                             html += "<div class='switch'>";
                             html += "   <input id='";
@@ -3453,7 +3438,7 @@ var formulario = (function () {
                             html += "' class='switch-label'></label>";
                             html += " </div>";
                             html += " <div class='navigation_nav_last'>";
-                            html += campos[4];
+                            html += textos[1];
                             html += "</div>";
                             html += "</div>";
                             break;
@@ -3462,7 +3447,7 @@ var formulario = (function () {
                             html += "<div id='";
                             html += campos[1];
                             html += "' style = 'max-width:";
-                        /*    html += campos[2];*/
+                            /*    html += campos[2];*/
                             html += "px'";
                             html += "' class='texto ";
                             html += campos[3];
@@ -3471,7 +3456,7 @@ var formulario = (function () {
                             html += "'></div>"
 
                     }
-                 
+
                     html += "</div>";
                 }
             }
@@ -3480,27 +3465,27 @@ var formulario = (function () {
         html += "</div>";
         if (ayudas == null) ayudas = [];
         div.innerHTML = html;
-     
+
     }
     return formulario;
 })();
 
 
 
-function crearNavigationNav(idNavigationNav,id) {
+function crearNavigationNav(idNavigationNav, id) {
     var html = "";
     html += "<img src='";
     html += hdfRaiz.value;
-    html+= "Images/home.svg' class='icono_navigation_nav' />";
+    html += "Images/home.svg' class='icono_navigation_nav' />";
     html += "<div class='navigation_nav'>Home</div>";
     var navigation = [];
     if (sessionStorage.getItem('navigation_page' + id) != null) {
         navigation = sessionStorage.getItem('navigation_page' + id).split('|');
-    }else {
+    } else {
         navigation = sessionStorage.getItem('navigation_page').split('|');
         sessionStorage.setItem('navigation_page' + id, sessionStorage.getItem('navigation_page'));
     };
-    var navcampos = navigation ;
+    var navcampos = navigation;
     var ncampos = navcampos.length;
     for (var i = 0; i < ncampos; i++) {
         if ((ncampos - 1) == i) {
@@ -3515,13 +3500,16 @@ function crearNavigationNav(idNavigationNav,id) {
         }
 
     }
-   
+
     idNavigationNav.innerHTML = html;
 
 }
 
 
-async function alerta(mensaje, cerrarAccion = false) {
+async function alerta(mensaje, cerrarAccion = false, duracion) {
+
+    duracion = (duracion == null ? 1.5 : duracion);
+    duracion = duracion * 1000;
     tipo = {
         exito: { tipoAlerta: 'exito', color: '#28a745', class: 'exito', img: hdfRaiz.value + 'Images/success.svg', },
         advertencia: { tipoAlerta: 'advertencia', color: '#ffc107', class: 'advertencia', img: hdfRaiz.value + 'Images/warning.svg', },
@@ -3529,19 +3517,19 @@ async function alerta(mensaje, cerrarAccion = false) {
     };
     var html = "";
     html += "<div  id='alertPopup' class='PopupContainerAlert' style='display: flex; justify-content: flex-end; align-items:flex-end;flex-wrap: wrap; overflow: scroll;overflow-x: hidden;'>";
-    if (typeof(mensaje) == "object" && typeof(mensaje[0]) == "string") {
-        html += crear(tipo[mensaje[1]].class, tipo[mensaje[1]].img, mensaje[0]);    
+    if (typeof (mensaje) == "object" && typeof (mensaje[0]) == "string") {
+        html += crear(tipo[mensaje[1]].class, tipo[mensaje[1]].img, mensaje[0]);
     }
     html += "</div>";
     document.body.insertAdjacentHTML('beforeend', html);
-    var nmensaje = mensaje.length-1;
+    var nmensaje = mensaje.length - 1;
 
     //if (typeof(mensaje) == "object" && typeof(mensaje[0]) =="object") {
     //    var interval = 400;
     //    mensaje.forEach((mensaje, i) => {
     //        setTimeout(() => {
     //            document.getElementById("alertPopup").insertAdjacentHTML('beforeend', crear(tipo[mensaje[1]].class, tipo[mensaje[1]].img, mensaje[0]));
-                
+
     //        }, i * interval)
     //    })
     //}
@@ -3572,9 +3560,9 @@ async function alerta(mensaje, cerrarAccion = false) {
     }
 
 
-   var alertas = document.getElementById("alertPopup").children;
-   var alertaPopud = document.getElementById("alertPopup");
-  await  delayAlerta(alertas);
+    var alertas = document.getElementById("alertPopup").children;
+    var alertaPopud = document.getElementById("alertPopup");
+    await delayAlerta(alertas);
 
     async function delayAlerta(listaAlertas) {
         var nListasAlertas = listaAlertas.length;
@@ -3585,23 +3573,24 @@ async function alerta(mensaje, cerrarAccion = false) {
             else {
                 await removeAlertars(listaAlertas[i]);
             }
-            
+
             i--;
-            
+
         }
-        document.body.removeChild(document.getElementById("alertPopup"));    
+        if (cerrarAccion) cerraralertaPopud();
+        document.body.removeChild(document.getElementById("alertPopup"));
     }
 
     async function removeAlertars(item) {
         return new Promise(resolve => {
-           item.classList.add('desaparecer');
+            item.classList.add('desaparecer');
             setTimeout(() => {
                 alertaPopud.removeChild(item);
                 resolve(true);
-            }, 1500)
+            }, duracion)
         });
     }
- 
+
     function crear(clase, img, mensaje) {
         var pop = "";
         pop += "<div class='PopupWindowAlert1 ";
@@ -3637,16 +3626,16 @@ function mostrarloader() {
 }
 
 function cerrarloader() {
-   var loader= document.getElementById("loader");
+    var loader = document.getElementById("loader");
     document.body.removeChild(loader);
 
 }
 
-function crearConfirm(mensaje,MensajeAlerta) {
-    var confirmacion ;
+function crearConfirm(mensaje, MensajeAlerta) {
+    var confirmacion;
     var html = "";
     html += "<div id='idConfirmPopup' class='PopupContainer' style='display:inline;'>";
-    html += "<div class='PopupWindow' style = '    border-radius: 15px;width: 300px; height: auto; margin: auto; margin-top: 5%; position: initial; color: white; background-color:var(--color-muniz-primary-verde) ; font-weight: bold;    overflow: hidden;'>";
+    html += "<div class='PopupWindow confirmPop' style = ''>";
     html += "<div class='Cuerpo' style='text-align: left;overflow: hidden;'>";
     html += mensaje;
     html += "</div>";
@@ -3654,11 +3643,11 @@ function crearConfirm(mensaje,MensajeAlerta) {
     html += "<input value='SI' type='button' class='grid_3' />";
     html += "<input value='NO' type='button' class='grid_3 gris' />";
 
-        html += "</div>";
-        html += "</div>";
-        html += "</div>";
-        document.body.insertAdjacentHTML('beforeend', html);
- 
+    html += "</div>";
+    html += "</div>";
+    html += "</div>";
+    document.body.insertAdjacentHTML('beforeend', html);
+
     var confirm = document.getElementById("idConfirmPopup");
     var btnAceptar = confirm.children[0].children[1].children[0];
     var btnCancelar = confirm.children[0].children[1].children[1];
@@ -3671,7 +3660,7 @@ function crearConfirm(mensaje,MensajeAlerta) {
         confirmacion = true;
     }
 
-    this.obtenerConfirmacion=  function() {
+    this.obtenerConfirmacion = function () {
         return new Promise(resolve => {
             var intervalo = setInterval(function () {
                 if (confirmacion == false || confirmacion == true) {
@@ -3682,7 +3671,7 @@ function crearConfirm(mensaje,MensajeAlerta) {
             }, 10);
         });
     }
- 
+
 }
 
 function compareDosFechas(fechaIni, fechaFin) {
@@ -3691,10 +3680,23 @@ function compareDosFechas(fechaIni, fechaFin) {
     return exito;
 }
 
+function convertDateToUTC(date) {
+    return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+}
+
 function validaResponseData(rpta) {
     var valida = true;
     if (rpta.substring(0, 5) == "ERROR") {
-        alerta(["Hubo un error intenta nuevamente", 'advertencia']);
+        if (rpta == "ERROR: Sesion Expirada") {
+            alerta(["Sesion Expirada", 'advertencia']);
+            setTimeout(() => {
+                window.location.href = hdfRaiz.value + "Sistema/Login";
+            }, 700)
+
+        } else {
+            alerta([rpta.substring(6, rpta.length), 'advertencia']);
+        }
+
         valida = false;
     }
     if (rpta == "") {
@@ -3759,6 +3761,8 @@ function crearResponsiveTable(listaCabecera, tabla, cabeceraNo) {
     hoja.innerHTML = style;
     document.body.appendChild(hoja);
 }
+
+
 
 
 
