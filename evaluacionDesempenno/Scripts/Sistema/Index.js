@@ -1,13 +1,21 @@
-﻿btnAceptar.onclick = function () {
-    var url = hdfRaiz.value + 'Sistema/Principal';
-    window.location.href = url;
-    var text = txtUsuario.value;
-    digestMessage(text)
-        .then(digestHex => console.log(digestHex));
+﻿
+btnAceptar.onclick = function () {
+    var usuario = txtUsuario.value;
+    var clave = txtClave.value;
+   
+
+digestMessage(clave)
+    .then(
+        digestHex => Http.get("Sistema/validarUsuario?data=" + usuario + "|" + digestHex, mostrarRptaLogin)
+        );
 
 }
 
-
+function mostrarRptaLogin(rpta) {
+    console.log(rpta);
+    //var url = hdfRaiz.value + 'Sistema/Principal';
+    //window.location.href = url;
+}
 
 async function digestMessage(message) {
     const msgUint8 = new TextEncoder().encode(message);                           
