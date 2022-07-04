@@ -21,7 +21,7 @@ function mostrarRpt(rpta) {
         listaLeyenda = listaEval[3].split(sepRegistros);
         listaUsu = listaEval[4].split(sepRegistros);
         crearEvaluacion();
-        createLegend();
+        createLegend(listaLeyenda);
     }     
 }
 function crearEvaluacion() {
@@ -31,7 +31,7 @@ function crearEvaluacion() {
     listaCompetencia.splice(0, 1);
     var ListaOpciones1 = ['A', 'B', 'C', 'D', 'E'];
     var ListaColores1= ['red', 'black', 'blue', 'green', 'yellow'];
-    crearTablaOpcionMultiple(ListaOpciones1, listaCompetencia, evaluacion_evaluacion, descripcion, true, ListaColores1);
+    crearTablaOpcionMultiple(ListaOpciones1, listaCompetencia, evaluacion_evaluacion, descripcion, true, ListaColores1, listaLeyenda);
     var ListaOpciones2 = ['70%', '80%', '100%', '110%', '120%'];
     var ListaColores2 = ['red', 'black', 'blue', 'green', 'yellow'];
     var descripcion2 = crearSubtituloResena(listaObjetivo[0].split(sepCampos)[0], listaObjetivo[0].split(sepCampos)[1]);
@@ -52,7 +52,7 @@ function crearSubtituloResena(titulo,descripcion) {
     
 }
 
-function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, tieneComentario, ListaColores) {
+function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, tieneComentario, ListaColores, listaLeyenda) {
     var campos = [];
     var opCampos = [];
     var nlistaOpciones = listaOpciones.length;
@@ -63,6 +63,9 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
     var nlistaData = listaData.length;
     var nlistaCabecera = listaCabecera.length;
     html += descripcion;
+    if (listaLeyenda) {
+        html += createLegend(listaLeyenda);
+    }
   html += "<table class='table'>";
    html += "<thead class='thead'>";
     html += "<tr>";
@@ -187,10 +190,11 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
 }
 
 
-function createLegend() {
+function createLegend(listaLeyenda) {
     var nlistaLeyenda = listaLeyenda.length;
     var campos = [];
     var html = "";
+    html += "<div class='form_basic_horizontal grid_start'>";
     html += "<div class='form_basic_horizontal_permanent '>";
     html += "<div class='texto'>";
     html += "Niveles: ";
@@ -210,8 +214,9 @@ function createLegend() {
         html += "</div>";
     }
     html += "</div>";
+    html += "</div>";
 
-    leyenda.innerHTML= html;
+ return html;
 }
 
 
