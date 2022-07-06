@@ -8,7 +8,7 @@ var listaUsu;
 
 window.onload = function () {
     Http.get("Trabajador/cargar", mostrarRpt);
-
+    Http.get("Trabajador/cargar", mostrarRpt1);
     console.log("subida prueba :diego");
 }
 
@@ -20,11 +20,11 @@ function mostrarRpt(rpta) {
         listaObjetivo = listaEval[2].split(sepRegistros);
         listaLeyenda = listaEval[3].split(sepRegistros);
         listaUsu = listaEval[4].split(sepRegistros);
-        crearEvaluacion();
+        crearEvaluacion2();
         createLegend(listaLeyenda);
     }     
 }
-function crearEvaluacion() {
+function crearEvaluacion2() {
     GUI.Combo(usuario,listaUsu);
     titulo_evaluacion.innerHTML = titulo;
     var descripcion= crearSubtituloResena(listaCompetencia[0].split(sepCampos)[0], listaCompetencia[0].split(sepCampos)[1]);

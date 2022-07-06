@@ -23,5 +23,11 @@ namespace evaluacionDesempenno.Controllers
             return rpta;
         }
 
+
+        public ActionResult ReporteDesenpeno()
+        {
+            return View();
+        }
+
     }
 }

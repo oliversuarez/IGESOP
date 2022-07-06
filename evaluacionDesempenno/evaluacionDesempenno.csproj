@@ -106,6 +106,7 @@
     <Content Include="Global.asax" />
     <Content Include="Imagenes\logo.jpeg" />
     <Content Include="Scripts\Evaluacion\evaluacion.js" />
+    <Content Include="Scripts\Evaluacion\evaluacionReporte.js" />
     <Content Include="Scripts\Genericos\General.js" />
     <Content Include="Scripts\Sistema\Index.js" />
     <Content Include="Scripts\Sistema\Principal.js" />

@@ -24,8 +24,100 @@
 
 
     </div>
+    <div class="container">
+        <h1 class="title m5 bold" id="">EVALUACIÓN DE DESEMPEÑO </h1>
+        <div class="grid_12 rellenoGPO m5">Información General</div>
+        <div class="grid_12 border m5 form_basic_horizontal">
+            <div class="form_2_column grid_3">
+                <div class="texto">Código</div>
+                <input type="text" />
+            </div>
+     
+            <div class="form_2_column grid_3">
+                <div class="texto">Nombre</div>
+                <input type="text" />
+            </div>
+            <div class="form_2_column grid_3">
+                <div class="texto">Área</div>
+                <input type="text" />
+            </div>
+            <div class="form_2_column grid_3">
+                <div class="texto">Gerencia</div>
+                <input type="text" />
+            </div>
+            <div class="form_2_column grid_6">
+                <div class="texto">Puesto</div>
+                <input type="text" />
+            </div>
+            <div class="form_2_column grid_3">
+                <div class="texto">Jefe Directo</div>
+                <input type="text" />
+            </div>
+            <div class="form_2_column grid_3">
+                <div class="texto">Fecha</div>
+                <input type="text" />
+            </div>
+        </div>
+        @*<div class="grid_12 rellenoGPO m5">Información General</div>
+        <div class="grid_12 border m5">Instrucciones: Marque con un "X" la ponderación de cada competencia en relación a los niveles descritos líneas abajo. Antes de marcar un cuadro estudie cuidadosamente cada caso. Juzgue la actuación de la persona durante todo el período de evaluación y no se base sólo en las últimas impresiones o experiencias. Procure ser lo más objetivo posible.</div>*@
+        <div class="m5" id="evaluacion_reporte"></div>
+        <div class="m5" id="objetivo_reporte"></div>
+        <div class="grid_12 rellenoGPO ">Resultado: Evaluación de Desempeño</div>
+        <div class="texto bold Upper ">Observaciones</div>
+        <div class="form_basic_horizontal grid_12">
+            <textarea class="grid_7" rows="15"></textarea>
+            <div class="grid_4">
+                <table>
+                    <table class="table">
+                        <tbody class="tbody">
+                            <tr>
+                                <td style="text-align: center; width: 30px;"></td>
+                                <td style="text-align: center; width: 60px;">Desempeño</td>
+                                <td style="text-align: center; width: 60px;">0%</td>
+                                <td colspan="2" style="text-align: center; width: 120px;">iceberg</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" style="writing-mode: vertical-rl; text-align: center;">presencial</td>
+                                <td style="text-align: center; writing-mode: vertical-rl;">ALTO</td>
+                                <td style='width: 60px; height: 80px; '></td>
+                                <td style='width: 60px; height: 80px; '></td>
+                                <td style='width: 60px; height: 80px; '></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center; writing-mode: vertical-rl;">MEDIO</td>
+                                <td style='width: 60px; height: 80px; '></td>
+                                <td style='width: 60px; height: 80px; '></td>
+                                <td style='width: 60px; height: 80px; '></td>
+                            </tr>
+
+                            <tr>
+                                <td style="text-align: center; writing-mode: vertical-rl;">BAJO</td>
+                                <td style='width: 60px; height: 80px; '></td>
+                                <td style='width: 60px; height: 80px; '></td>
+                                <td style='width: 60px; height: 80px; '></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align:center;">BAJO</td>
+                                <td style="text-align:center;"> MEDIO</td>
+                                <td style="text-align:center;">ALTO</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td colspan="3" style="text-align:center;">DESEMPEÑO</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </table>
+            </div>
+        </div>
+
+    </div>
     <input id="hdfRaiz" type="hidden" value='@Url.Content("~")' />
     <script src="~/Scripts/Genericos/General.js"></script>
     <script src="~/Scripts/Evaluacion/evaluacion.js"></script>
+    <script src="~/Scripts/Evaluacion/evaluacionReporte.js"></script>
 </body>
 </html>

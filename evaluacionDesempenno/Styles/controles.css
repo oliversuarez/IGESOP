@@ -38,7 +38,15 @@
 .m5 {
     margin: 5px;
 }
+.border{
+    border:solid 1px black;
+}
 
+.rellenoGPO{
+    background-color:black;
+    color:white;
+    text-align:center;
+}
 .dNone {
     display: none !important;
 }
