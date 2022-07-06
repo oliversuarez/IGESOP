@@ -1,4 +1,8 @@
+
 ﻿using General.Librerias.AccesoDatos;
+
+﻿using evaluacionDesempenno.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +16,11 @@ namespace evaluacionDesempenno.Controllers
         // GET: Sistema
         public ActionResult Index()
         {
+            ViewBag.token = Guid.NewGuid().ToString();
+            
             return View();
         }
+
 
         public string validarUsuario(string data)
         {
@@ -26,13 +33,16 @@ namespace evaluacionDesempenno.Controllers
                 Session["usuario"] = datos[0];
 
             }
-            //rpta = odaSQL.EjecutarComando("dbo.sha512");
+
             return rpta;
             
         }
 
+
         public ActionResult Principal()
         {
+            object tokenHeader = HttpContext.Request.Headers["token"];
+            Session[tokenHeader+"usuario"] = new SessionUsuario();
             return View();
         }
 

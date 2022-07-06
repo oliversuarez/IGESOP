@@ -63,10 +63,13 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
     var nlistaData = listaData.length;
     var nlistaCabecera = listaCabecera.length;
     html += descripcion;
+
     if (listaLeyenda) {
         html += createLegend(listaLeyenda);
     }
   html += "<table class='table'>";
+
+    html += "<table class='table' >";
    html += "<thead class='thead'>";
     html += "<tr>";
     html += "<th>";
@@ -94,7 +97,9 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
 
       html += "</tr>";
     html += "</thead>";
-    html += "<tbody class='tbody'>";
+    html += "<tbody class='tbody' id='tbData";
+    html += div.id;
+    html +="'>";
     for (var i = 0; i < nlistaData; i++) {
         campos = listaData[i].split(sepCampos);
         matriz[i] = [];
@@ -187,6 +192,14 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
             }
         }
     }
+   
+    var concatenador = ['#'];
+    var cabeceraResponsive = listaCabecera.concat(listaOpciones);
+
+    if (tieneComentario) {
+        cabeceraResponsive.push('feedBack');
+    }
+    crearResponsiveTable(concatenador.concat(cabeceraResponsive), div.id, false);
 }
 
 
