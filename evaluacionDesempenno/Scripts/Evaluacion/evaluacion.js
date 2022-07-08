@@ -5,6 +5,8 @@ var listaObjetivo;
 var listaLeyenda;
 var listaUsu;
 
+var competencia;
+var objetivo;
 
 window.onload = function () {
     Http.get("Trabajador/cargar", mostrarRpt);
@@ -31,12 +33,18 @@ function crearEvaluacion2() {
     listaCompetencia.splice(0, 1);
     var ListaOpciones1 = ['A', 'B', 'C', 'D', 'E'];
     var ListaColores1= ['red', 'black', 'blue', 'green', 'yellow'];
-    crearTablaOpcionMultiple(ListaOpciones1, listaCompetencia, evaluacion_evaluacion, descripcion, true, ListaColores1, listaLeyenda);
+    competencia= new crearTablaOpcionMultiple(ListaOpciones1, listaCompetencia, evaluacion_evaluacion, descripcion, true, ListaColores1, listaLeyenda);
     var ListaOpciones2 = ['70%', '80%', '100%', '110%', '120%'];
     var ListaColores2 = ['red', 'black', 'blue', 'green', 'yellow'];
     var descripcion2 = crearSubtituloResena(listaObjetivo[0].split(sepCampos)[0], listaObjetivo[0].split(sepCampos)[1]);
     listaObjetivo.splice(0, 1);
-    crearTablaOpcionMultiple(ListaOpciones2, listaObjetivo, objetivo_evaluacion, descripcion2, true, ListaColores2);
+    objetivo= new crearTablaOpcionMultiple(ListaOpciones2, listaObjetivo, objetivo_evaluacion, descripcion2, true, ListaColores2);
+}
+
+
+guardarDesenpeno.onclick = function () {
+    competencia.validarCheckOpciones();
+  /*  objetivo.validarCheckOpciones();*/
 }
 
 function crearSubtituloResena(titulo,descripcion) {
@@ -58,6 +66,7 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
     var nlistaOpciones = listaOpciones.length;
     var html = "";
     var matriz = [];
+    var nMatriz = 0;
     var listaCabecera = listaData[0].split(sepCampos);
     listaData.splice(0, 1);
     var nlistaData = listaData.length;
@@ -119,6 +128,7 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
             matriz[i][nlistaCabecera + j] = [];
             matriz[i][nlistaCabecera + j][0] = opCampos[0];
             matriz[i][nlistaCabecera + j][1] = false;
+            matriz[i][nlistaCabecera + j][2] = false;
             html += "<td class='";
             html += campos[0];
             html+="opcionCheck' data-valor='";
@@ -146,6 +156,7 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
     html += "</table>";
     div.innerHTML = html;
     console.log(matriz);
+    nMatriz = matriz.length;
     configurarCheck();
     function configurarCheck() {
        
@@ -200,6 +211,24 @@ function crearTablaOpcionMultiple(listaOpciones, listaData, div, descripcion, ti
         cabeceraResponsive.push('feedBack');
     }
     crearResponsiveTable(concatenador.concat(cabeceraResponsive), div.id, false);
+
+    this.validarCheckOpciones = function () {
+        var valido = true;
+        var  listaOp = nlistaCabecera + nlistaOpciones;
+        for (var i = 0; i < nMatriz; i++) {
+            for (var j = nlistaCabecera; j < listaOp; j++) {
+                if (matriz[i][j][1] == true) {
+                    valido = true;
+                    break;
+                } else {
+                    valido = false;
+                }
+            }
+        }
+        if (!valido) {
+            alert("falta completar el formulario");
+        }
+    }
 }
 
 
